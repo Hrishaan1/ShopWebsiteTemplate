@@ -82,11 +82,16 @@
                 </div>
 
                 <!-- Mobile Navigation Menu -->
-                <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 p-4 shadow-lg space-y-4 md:hidden">
-                    <a href="#home" class="nav-link block">Home</a>
-                    <a href="#products" class="nav-link block">Products</a>
-                    <a href="#about" class="nav-link block">About</a>
-                    <a href="#contact" class="nav-link block">Contact</a>
+                <div id="mobileMenu" class="hidden fixed inset-x-0 top-[72px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm p-6 shadow-lg md:hidden">
+                    <nav class="flex flex-col space-y-4">
+                        <a href="#home" class="nav-link block w-full text-center text-lg py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">Home</a>
+                        <a href="#products" class="nav-link block w-full text-center text-lg py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">Products</a>
+                        <a href="#about" class="nav-link block w-full text-center text-lg py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">About</a>
+                        <a href="#contact" class="nav-link block w-full text-center text-lg py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">Contact</a>
+                        <button onclick="document.documentElement.classList.toggle('dark')" class="w-full text-center text-lg py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-600 dark:text-gray-300">
+                            Toggle Theme
+                        </button>
+                    </nav>
                 </div>
             </div>
         </nav>
@@ -303,35 +308,30 @@
 
     <!-- Mobile Menu JavaScript -->
     <script>
-        document.getElementById('menuButton').addEventListener('click', () => {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-            menu.classList.toggle('flex-col');
-            menu.classList.toggle('absolute');
-            menu.classList.toggle('top-16');
-            menu.classList.toggle('left-0');
-            menu.classList.toggle('right-0');
-            menu.classList.toggle('bg-white');
-            menu.classList.toggle('dark:bg-gray-900');
-            menu.classList.toggle('p-4');
-            menu.classList.toggle('space-y-4');
-            menu.classList.toggle('shadow-lg');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.getElementById('mobileMenu');
-                if (!menu.classList.contains('hidden') && window.innerWidth < 768) {
-                    menu.classList.add('hidden');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            // Toggle mobile menu
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
             });
-        });
 
-        // Style navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'transition-colors');
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden') && window.innerWidth < 768) {
+                        mobileMenu.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');
+                    }
+                });
+            });
+
+            // Style navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'transition-colors');
+            });
         });
     </script>
 </body>
