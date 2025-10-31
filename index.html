@@ -1,1 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="template_faviconwbg.png">
+    <title>TechPrint Studio - Custom 3D Printing Services</title>
+    <!-- TailwindCSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Intersection Observer for Fade-in Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in', 'opacity-100');
+                    }
+                });
+            }, { threshold: 0.1 });
 
+            document.querySelectorAll('.fade-in-section').forEach((el) => {
+                el.classList.add('opacity-0');
+                observer.observe(el);
+            });
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            darkModeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                darkModeToggle.innerHTML = isDark ? 
+                    '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>' :
+                    '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>';
+            });
+        });
+    </script>
+</head>
+<body class="dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header - Sticky Navigation -->
+    <header class="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-blue-600 dark:text-blue-400">TechPrint Studio</a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="menuButton" class="md:hidden text-gray-600 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#products" class="nav-link">Products</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation Menu -->
+                <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 p-4 shadow-lg space-y-4 md:hidden">
+                    <a href="#home" class="nav-link block">Home</a>
+                    <a href="#products" class="nav-link block">Products</a>
+                    <a href="#about" class="nav-link block">About</a>
+                    <a href="#contact" class="nav-link block">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900" id="home">
+        <div class="container mx-auto fade-in-section">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-6xl md:text-6.5xl font-bold mb-8 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                    Custom 3D Prints, Designed for You
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
+                    Bring your ideas to life with our premium 3D printing services. 
+                    From concept to creation, we're here to make your designs reality.
+                </p>
+                <a href="#products" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl dark:bg-blue-500 dark:hover:bg-blue-600">
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 px-6 bg-white dark:bg-gray-900">
+        <div class="container mx-auto fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Our Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Custom Miniatures</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">High-detail custom miniatures perfect for gaming or display.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$29.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Architectural Models</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Professional architectural models with precise details.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$149.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Custom Parts</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Replacement parts and custom mechanical components.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$39.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Decorative Items</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Beautiful decorative pieces for your home or office.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$49.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Educational Models</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Educational models for schools and institutions.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$89.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <span class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Product Photo</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Custom Jewelry</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Unique 3D printed jewelry and accessories.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">$69.99</span>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto max-w-4xl fade-in-section">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">About Us</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        At TechPrint Studio, we're passionate about bringing innovation to life through 3D printing. 
+                        Our team of expert designers and technicians work tirelessly to ensure every print meets our 
+                        high standards of quality and precision.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Founded in 2023, we've helped countless clients transform their ideas into reality. 
+                        Whether you're a hobbyist, professional, or business, we have the expertise to make 
+                        your project a success.
+                    </p>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg">
+                    <span class="w-full h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium">Workspace Photo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-white dark:bg-gray-900">
+        <div class="container mx-auto max-w-4xl fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Get in Touch</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 rounded-lg border dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-lg border dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors dark:bg-blue-500 dark:hover:bg-blue-600">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Direct Contact</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Prefer to email us directly? Reach out at:
+                            <a href="mailto:contact@techprintstudio.com" class="text-blue-600 dark:text-blue-400 hover:underline">contact@techprintstudio.com</a>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Business Hours</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Monday - Friday: 9:00 AM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-blue-400 mb-4">TechPrint Studio</h3>
+                    <p class="text-gray-400">Bringing your ideas to life through innovative 3D printing solutions.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition-colors">Products</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">© 2025 TechPrint Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        document.getElementById('menuButton').addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+            menu.classList.toggle('flex-col');
+            menu.classList.toggle('absolute');
+            menu.classList.toggle('top-16');
+            menu.classList.toggle('left-0');
+            menu.classList.toggle('right-0');
+            menu.classList.toggle('bg-white');
+            menu.classList.toggle('dark:bg-gray-900');
+            menu.classList.toggle('p-4');
+            menu.classList.toggle('space-y-4');
+            menu.classList.toggle('shadow-lg');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                if (!menu.classList.contains('hidden') && window.innerWidth < 768) {
+                    menu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Style navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'transition-colors');
+        });
+    </script>
+</body>
+</html>
